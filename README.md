@@ -139,5 +139,171 @@ Misalkan banyak kematian karena kanker tulang untuk seluruh pekerja di pabrik ba
 a.) Bagaimana pendistribusian banyak kematian karena kanker tulang? Tentukan distribusi dengan parameter yang sesuai.
 
 **Penyelesaian** :
-- 
+- Pendistribusian banyak kematian karena kanker tulang dapat dihitung dengan menggunakan distribusi Poisson karena kematian ini terjadi secara acak dan frekuensi kematiannya dapat dihitung dalam waktu yang ditentukan. Distribusi ini merupakan distribusi probabilitas untuk menghitung banyak kejadian langka dalam interval waktu tertentu. 
+
+```r
+lambda <- 1.8
+
+# menghitung pendistribusian banyak kematian karena kanker tulang dengan menggunakan fungsi dpois().
+probs <- dpois(0:10, lambda)
+
+# Menampilkan grafik histogram dengan fungsi barplot()
+bp <- barplot(probs, names.arg = 0:n, xlab = "Banyak Kematian karena Kanker Tulang", ylab = "Probabilitas", col = "blue")
+
+# Menambahkan teks berupa nilai pada masing-masing bar
+text(bp, probs, labels = round(probs, 3), pos = 3, cex = 0.8, col = "black")
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236260157-2f8b970d-f0e2-4806-972b-66c581c2859f.png)
+
+b.) Ada 4 kematian akibat kanker tulang yang dilaporkan di kalangan pekerja pabrik ban, apakah itu peristiwa yang tidak biasa? Hitung probabilitas berdasarkan distribusi yang telah dipilih.
+
+**Penyelesaian** :
+- Untuk menentukan apakah 4 kematian akibat kanker tulang di kalangan pekerja pabrik ban adalah peristiwa yang tidak biasa, kita dapat menghitung probabilitasnya berdasarkan distribusi Poisson yang telah dipilih. Untuk menentukan apakah peristiwa tersebut biasa atau tidak, kita dapat membandingkan probabilitas terjadinya peristiwa tersebut dengan sebuah batasan yang disebut sebagai alpha level atau tingkat signifikansi. Jika probabilitas terjadinya peristiwa tersebut lebih rendah dari alpha level, maka kita dapat menyimpulkan bahwa peristiwa tersebut cukup tidak biasa atau jarang terjadi.
+
+```r
+# Parameter distribusi Poisson
+lambda <- 1.8
+
+# Nilai yang dicari
+x <- 4
+
+# Alpha level
+alpha <- 0.05
+
+# Hitung batas atas probabilitas
+upper <- qpois(1 - alpha/2, lambda)
+
+# Hitung batas bawah probabilitas
+lower <- qpois(alpha/2, lambda)
+
+# Hitung probabilitas distribusi Poisson pada nilai x
+prob <- dpois(x, lambda)
+
+# Tampilkan hasil probabilitas, batas atas, dan batas bawah
+cat("Probabilitas: ", prob, "\n")
+cat("Batas atas: ", upper, "\n")
+cat("Batas bawah: ", lower, "\n")
+
+# Mengecek apakah peristiwa tersebut tidak biasa atau jarang
+if(x > upper | x < lower) {
+  cat("Peristiwa tersebut tidak biasa atau jarang.")
+} else {
+  cat("Peristiwa tersebut biasa atau umum terjadi.")
+}
+```
+![2b](https://user-images.githubusercontent.com/88433109/236265977-4a63b581-868b-4d20-9762-7d1699f8ee7f.JPG)
+- Probabilitasnya yaitu 0.07230173. Dengan Alpha level 0.05, didapat batas atas 5 dan batas bawah 0. Peristiwa tersebut biasa atau umum terjadi.
+
+c.) Berapa peluang paling banyak 4 kematian akibat kanker tulang?
+
+**Penyelesaian** :
+ -  Untuk menghitung berapa peluang paling banyak 4 kematian akibat kanker tulang, kita perlu menggunakan fungsi distribusi kumulatif. Fungsi distribusi kumulatif untuk distribusi Poisson adalah ppois(), yang menghitung peluang variabel acak Poisson X ≤ k dengan parameter λ.
+ 
+ ```r
+# Parameter distribusi Poisson
+lambda <- 1.8
+
+# Nilai yang dicari
+x <- 4
+
+# Menghitung peluang paling banyak kematian akibat kanker tulang dengan fungsi ppois()
+ppois(x, lambda)
+ ```
+ 
+ ![image](https://user-images.githubusercontent.com/88433109/236265502-adeea479-d11b-47cf-8aa8-d32b3e4b12cd.png)
+ - Probabilitas paling banyak 4 kematian akibat kanker tulang dalam 20 tahun kedepan yaitu 0.9635933.
+
+d.) Berapa peluang lebih dari 4 kematian akibat kanker tulang?
+
+**Penyelesaian** :
+- Probabilitas lebih dari 4 kematian akibat kanker tulang dapat dihitung dengan menggunakan probabilitas kejadian lawan (dalam hal ini, paling banyak 4 kematian) dan menguranginya dari 1.
+
+```r
+# Parameter distribusi Poisson
+lambda <- 1.8
+
+# Nilai yang dicari
+x <- 4
+
+# Menghitung peluang lebih dari 4 kematian akibat kanker tulang dengan fungsi ppois() dan menguranginya dari 1
+1 - ppois(x, lambda)
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236267463-2c20e530-f1cf-41e1-a96a-d058f3dfee0a.png)
+- Probabilitas lebih dari 4 kematian akibat kanker tulang dalam 20 tahun kedepan yaitu 0.03640666.
+
+e.) Berdasarkan distribusi yang telah dipilih, berapakah nilai harapan dan standar deviasi banyak kematian akibat kanker tulang untuk pekerja pabrik ban?
+
+**Penyelesaian** :
+- Nilai harapan (mean) adalah ukuran sentral atau karakteristik pusat dari distribusi data, yang menunjukkan rata-rata dari data tersebut.
+Simpangan baku (standard deviation) adalah ukuran penyebaran atau variabilitas dari distribusi data. Semakin tinggi nilai simpangan baku, semakin besar variasi atau keragaman data dari nilai rata-ratanya. 
+- Nilai Harapan: $E(X) = λ$
+- Simpangan Baku: $SD(X) = \sqrt{λ}$
+
+![image](https://user-images.githubusercontent.com/88433109/236269343-d81d8305-78b3-4a40-a693-a44020f86e53.png)
+- Nilai harapannya yaitu 1.8 dan Standar deviasinya yaitu 1.341641.
+
+f.) Gambarkan histogram pendistribusian banyak banyak kematian akibat kanker tulang untuk pekerja pabrik ban.
+
+**Penyelesaian** :
+- Untuk menggambar histogram, kita dapat menggunakan fungsi barplot().
+
+```r
+# Parameter distribusi Poisson
+lambda <- 1.8
+
+# menghitung pendistribusian banyak kematian karena kanker tulang dengan menggunakan fungsi dpois().
+probs <- dpois(0:10, lambda)
+
+# Menampilkan grafik histogram dengan fungsi barplot()
+bp <- barplot(probs, names.arg = 0:n, xlab = "Banyak Kematian karena Kanker Tulang", ylab = "Probabilitas", col = "blue")
+
+# Menambahkan teks berupa nilai pada masing-masing bar
+text(bp, probs, labels = round(probs, 3), pos = 3, cex = 0.8, col = "black")
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236260157-2f8b970d-f0e2-4806-972b-66c581c2859f.png)
+
+g.) Gunakan simulasi untuk memeriksa hasil sebelumnya.
+
+**Penyelesaian** : 
+- Untuk memodelkan simulasi kita menggunakan fungsi rpois dengan parameter lambda dan jumlah simulasi yaitu 100000.
+
+```r
+# Parameter distribusi Poisson
+lambda <- 1.8
+
+# Jumlah simulasi
+n_sim <- 100000
+
+# Fungsi  yang digunakan untuk mengatur "seed" pada generator angka acak agar menghasilkan urutan bilangan acak yang sama pada saat simulasi
+set.seed(123)
+
+# Mensimulasikan banyaknya kematian akibat kanker tulang untuk seluruh pekerja di pabrik ban dengan fungsi rpois()
+sim_data <- rpois(n_sim, lambda)
+
+# Hasil simulasi dengan 4 kematian
+prob_4 <- sum(sim_data == 4) / n_sim
+prob_4
+
+# Hasil simulasi dengan lebih dari 4 kematian 
+prob_more4 <- sum(sim_data > 4) / n_sim
+prob_more4
+
+# Hasil simulasi dengan paling banyak 4 kematian
+prob_max4 <- sum(sim_data <= 4) / n_sim
+prob_max4
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236276499-5c80aed1-aee8-46af-923f-2a260de94e13.png)
+- Hasil simulasi dengan 4 kematian, lebih dari 4 kematian, dan paling banyak 4 kemtian masing-masing yaitu 0.07122, 0.03662, 0.96338.
+
+h.) Jelaskan banyak kematian akibat kanker tulang berdasarkan simulasi Anda. Bandingkan jawaban pada pertanyaan 2d dengan hasil simulasi Anda.
+
+**Penyelesaian** :
+- Berdasarkan simulasi, didapatkan hasil simulasi untuk probabilitas lebih dari 4 kematian akibat kanker tulang yaitu 0.03662. Sedangkan hasil nomor 2d untuk probabilitas lebih dari 4 kematian akibat kanker tulang yaitu 0.03640666. Terdapat perbedaan yang tidak terlalu signifikan antara keduanya. Hal ini mungkin disebabkan oleh pengaruh ukuran sampel simulasi yang dilakukan. Semakin besar ukuran sampel, semakin mendekati hasil simulasi dengan hasil perhitungan yang sebenarnya.
+
+
+
 
