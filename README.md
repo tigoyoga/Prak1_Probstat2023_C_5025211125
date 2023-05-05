@@ -463,4 +463,141 @@ var(data)
 ![image](https://user-images.githubusercontent.com/88433109/236327863-068ae982-ffbd-4157-bab2-9935b0f3239f.png)
 - Nilai varian dari hasil data bangkitan acak distribusi Normal yaitu 20.83082.
 
+## No 5
+Kerjakanlah menggunakan distribusi T-Student.
 
+a.) Berapa probabilitas terjadinya suatu peristiwa acak X kurang dari -2,34 dengan 6 derajat kebebasan?
+
+**Penyelesaian** :
+- Untuk menghitung probabilitas terjadinya suatu peristiwa acak X kurang dari suatu nilai x tertentu pada distribusi t-Student dengan derajat kebebasan df tertentu pada R, dapat menggunakan fungsi pt(x, df).
+
+```r
+# Parameter probabilitas distribusi T-Student
+x <- -2.34
+df <- 6
+
+# Menghitung probabilitas terjadinya suatu peristiwa acak X kurang dari -2,34 dengan 6 derajat kebebasan dengan fungsi pt()
+pt(x, df)
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236483734-347b4d7e-b067-4d96-a3c6-0bb7f140b909.png)
+- Nilai probabilitas terjadinya suatu peristiwa acak X kurang dari -2,34 dengan 6 derajat kebebasan yaitu 0.02892197.
+
+b.) Berapa probabilitas terjadinya suatu peristiwa acak X lebih dari 1,34 dengan 6 derajat kebebasan?
+
+**Penyelesaian** :
+- Probabilitas terjadinya suatu peristiwa acak X lebih dari 1,34 dengan 6 derajat kebebasan dapat dihitung dengan menggunakan cara perhitungan pada poin a dan menguranginya dari 1.
+
+```r
+# Parameter probabilitas distribusi T-Student
+x <- 1.34
+df <- 6
+
+# Menghitung probabilitas terjadinya suatu peristiwa acak X lebih dari 1,34 dengan 6 derajat kebebasan dengan fungsi pt() lalu menguranginya dari 1
+1 - pt(x, df)
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236485073-fbdfa785-24d2-4309-a8d3-ba9122a2882c.png)
+- Nilai probabilitas terjadinya suatu peristiwa acak X lebih dari 1,34 dengan 6 derajat kebebasan yaitu 0.11438.
+
+ c.) Berapa probabilitas terjadinya suatu peristiwa acak X kurang dari -1,23 atau lebih besar dari 1,23 dengan 3 derajat kebebasan?
+ 
+ 
+ **Penyelesaian** :
+ - Untuk menyelesaikan soal ini, kita dapat menggunakan distribusi t-Student dan membagi kasus menjadi dua bagian, yaitu probabilitas terjadinya suatu peristiwa acak X kurang dari -1,23 dan probabilitas terjadinya suatu peristiwa acak X lebih besar dari 1,23. Kedua probabilitas tersebut dapat dihitung menggunakan fungsi pt() dan kemudian dijumlahkan.
+
+```r
+# Probabilitas terjadinya suatu peristiwa acak X kurang dari -1,23
+p_c1 <- pt(-1.23, df=3)
+
+# Probabilitas terjadinya suatu peristiwa acak X lebih besar dari 1,23
+p_c2 <- 1 - pt(1.23, df=3)
+
+# Jumlahkan keduanya
+p_c1 + p_c2
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236496019-355e17f3-49c9-4ed0-ac93-af3674dfb3eb.png)
+- Nilai probabilitas terjadinya suatu peristiwa acak X kurang dari -1,23 atau lebih besar dari 1,23 dengan 3 derajat kebebasan yaitu 0.306356.
+
+d.) Berapa probabilitas terjadinya suatu peristiwa acak X berada di antara -0,94 dan 0,94 dengan 14 derajat kebebasan?
+
+**Penyelesaian** : 
+- Untuk menyelesaikan soal ini, kita dapat menggunakan distribusi t-Student dan menghitung probabilitas terjadinya suatu peristiwa acak X berada di antara -0,94 dan 0,94. Probabilitas tersebut dapat dihitung menggunakan perbedaan antara dua fungsi pt().
+
+```r
+# Probabilitas terjadinya suatu peristiwa acak X kurang dari 0.94
+p_d1 <- pt(0.94, df=14)
+
+# Probabilitas terjadinya suatu peristiwa acak X lebih dari dari -0.94
+p_d2 <- pt(-0.94, df=14)
+
+# Hitung selisihnya
+p_d1 - p_d2
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236497360-267f2041-5072-44d4-b9e1-c8e4389e5e8f.png)
+- Nilai probabilitas terjadinya suatu peristiwa acak X berada di antara -0,94 dan 0,94 dengan 14 derajat kebebasan yaitu 0.6368457.
+
+e.) Berapa nilai t-score dengan 5 derajat kebebasan yang memiliki luasan 0,0333 satuan persegi di bawah kurva dan di sebelah kiri t-score tersebut?
+
+**Penyelesaian** :
+- Untuk menyelesaikan soal ini, kita dapat menggunakan fungsi qt() pada R untuk mencari nilai t-score dengan 5 derajat kebebasan yang memiliki luasan 0,0333 satuan persegi di bawah kurva dan di sebelah kiri t-score tersebut.
+
+```r
+# Menghitung nilai t-score dengan fungsi qt()
+qt(0.0333, df=5)
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236498376-d9dd8d89-e60a-4b08-ae2b-66166e1ef3bf.png)
+- Nilai t-score dengan 5 derajat kebebasan yang memiliki luasan 0,0333 satuan persegi di bawah kurva dan di sebelah kiri t-score yaitu -2.337342.
+
+f.) Berapa nilai t-score dengan 25 derajat kebebasan yang memiliki luasan 0,125 satuan persegi di bawah kurva dan di sebelah kanan t-score tersebut?
+
+**Penyelesaian** :
+- Untuk menyelesaikan soal ini, kita dapat menggunakan fungsi qt() pada R untuk mencari nilai t-score dengan 25 derajat kebebasan yang memiliki luasan 0,125 satuan persegi di bawah kurva dan di sebelah kanan t-score tersebut. Kita menggunakan parameter lower.tail=FALSE dalam fungsi qt() untuk menunjukkan bahwa kita ingin mencari probabilitas pada ekor kanan distribusi.
+
+```r
+# Menghitung nilai t-score dengan fungsi qt() 
+qt(0.125, df=25, lower.tail=FALSE)
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236499797-ac96a5e2-9aaf-4ebd-b335-3e37157e7019.png)
+- Nilai t-score dengan 25 derajat kebebasan yang memiliki luasan 0,125 satuan persegi di bawah kurva dan di sebelah kanan t-score yaitu 1.177716.
+
+g.) Berapa nilai t-score dengan 11 derajat kebebasan yang memiliki luasan 0,75 satuan persegi di bawah kurva dan di antara t-score tersebut dan negatif dari nilai t-score tersebut?
+
+**Penyelesaian** :
+- Untuk mencari t-score yang mempunyai luasan 0.75 di antara titik tersebut dan negatif dari nilai t-score tersebut, kita dapat menggunakan rumus berikut: t_score_right - abs(t_score_left), dimana t_score_right adalah t-score yang mempunyai luasan 0.75 di sebelah kanan titik tersebut, dan t_score_left adalah t-score yang mempunyai luasan 0.25 di sebelah kiri titik tersebut.
+
+Untuk mencari t_score_right dan t_score_left, kita dapat menggunakan fungsi qt() pada R dengan menghitung probabilitas di sebelah kanan dan kiri t-score tersebut dengan rumus berikut: 0.25 + (0.75 / 2).
+
+```r
+# Mencari t-score di sebelah kanan titik
+ts_right <- qt(0.25 + (0.75 / 2), 11, lower.tail = FALSE)
+
+# Mencari t-score di sebelah kiri titik
+ts_left <- qt(0.25 + (0.75 / 2), 11, lower.tail = TRUE)
+
+# Menghitung t-score yang dicari
+ts_right - abs(ts_left)
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236510478-7c20e64f-8e2a-4c33-b7a7-15f03df79dab.png)
+- Nilai t-score yang dicari yaitu -0.6534728.
+
+h.) Berapa nilai t-score dengan 23 derajat kebebasan yang memiliki luasan 0,0333 satuan persegi di bawah kurva dan di luar interval antara t-score tersebut dan negatif dari nilai t-score tersebut?
+
+**Penyelesaian** :
+- Untuk mencari t-score yang mempunyai luasan 0.3333 di bawah kurva dan di luar interval antara t-score tersebut, kita dapat menggunakan rumus yang sama dengan poin g namun pada tahap akhir kita menjumlahkan keduanya.
+
+```r
+# Menghitung nilai t-score
+ts_right <- qt(0.0333 / 2,  23, lower.tail = FALSE)
+ts_left <- qt(0.0333 / 2,  23, lower.tail = TRUE)
+abs(ts_left) + ts_right
+
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236519263-9b61d14a-da40-4e2e-8ca2-9f351c54114d.png)
+- Nilai t-score yang dicari yaitu 4.528401.
