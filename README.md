@@ -304,6 +304,161 @@ h.) Jelaskan banyak kematian akibat kanker tulang berdasarkan simulasi Anda. Ban
 **Penyelesaian** :
 - Berdasarkan simulasi, didapatkan hasil simulasi untuk probabilitas lebih dari 4 kematian akibat kanker tulang yaitu 0.03662. Sedangkan hasil nomor 2d untuk probabilitas lebih dari 4 kematian akibat kanker tulang yaitu 0.03640666. Terdapat perbedaan yang tidak terlalu signifikan antara keduanya. Hal ini mungkin disebabkan oleh pengaruh ukuran sampel simulasi yang dilakukan. Semakin besar ukuran sampel, semakin mendekati hasil simulasi dengan hasil perhitungan yang sebenarnya.
 
+## No 3
+Diketahui nilai x = 3 dan v = 10. Tentukan:
+
+a.) Fungsi probabilitas dari distribusi Chi-Square.
+
+**Penyelesaian** :
+- Untuk menentukan probabilitas dari distribusi Chi-Square kita dapat menggunakan fungsi 
+
+```r
+# Parameter distribusi Chi-Square
+x <- 3
+v <- 10
+
+dchisq(x, v)
+
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236297578-f6c620e4-03f6-4755-a383-a4a96a1b53b1.png)
+- Nilai probabilitas dari distribusi Chi-Square yaitu 0.02353326
+
+b.) Histogram dari distribusi Chi-Square dengan 500 data acak.
+
+**Penyelesaian** :
+- Untuk menampilkan histogram, kita dapat menggunakan fungsi hist().
+
+```r
+# Parameter distribusi Chi-Square
+v <- 10
+
+# Digunakan untuk menghasilkan angka acak yang dapat direproduksi sehingga hasilnya selalu sama
+set.seed(123) 
+
+# Fungsi untuk menghasilkan 500 bilangan acak dari distribusi Chi-Square 
+x <- rchisq(500, 10) 
+
+# Menampilkan histogram dengan fungsi hist().
+hist(x, breaks = 20, main = "Histogram Chi-Square df=10", xlab = "Nilai", ylab = "Frekuensi")
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236302375-9bc24554-f7c7-43b7-b33c-6de49a763ba8.png)
+
+c.) Nilai rataan (μ) dan varian (σ²) dari distribusi Chi-Square.
+
+**Penyelesaian** : 
+- Untuk distribusi Chi-Square, nilai rata-rata (μ) dan varian (σ²) dapat dihitung dengan rumus berikut:
+
+- Nilai rataan atau μ = $v$
+
+- varian atau σ² = $2v$
+
+```r
+v <- 10
+
+mean <- v
+var <- 2 * v
+
+cat("Nilai rataan dari distribusi Chi-Square yaitu :", mean)
+
+cat("Nilai varian dari distribusi Chi-Square yaitu :", var)
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236320285-fe1581ad-f412-41cc-a277-328b4dcb8b5a.png)
+- Nilai rataannya yaitu 10 dan nilai variannya yaitu 20.
+
+## No 4
+Diketahui data bangkitan acak sebanyak 100 dengan mean = 45 dan sd = 5.
+
+a.) Fungsi probabilitas dari distribusi Normal P(X1 ≤ x ≤ X2), hitung z-scorenya dan plot data bangkitan acaknya dalam bentuk grafik. Petunjuk (gunakan fungsi plot()).
+
+**Penyelesaian** :
+- Untuk menyelesaikan masalah tersebut, pertama-tama kita perlu membuat data bangkitan acak dengan menggunakan fungsi rnorm(). Kemudian, untuk mencari fungsi probabilitas dari distribusi normal, kita akan menghitung probabilitas P(X1 ≤ x ≤ X2) dengan menghitung z-score dari nilai X1 dan X2, menggunakan rumus:
+
+- z = $(x - μ) / σ$
+
+- Setelah menghitung z-score, kita dapat mencari probabilitas dari distribusi normal menggunakan tabel distribusi normal standar atau menggunakan fungsi pnorm(). Terakhir, kita akan membuat plot data bangkitan acak dalam bentuk histogram menggunakan fungsi hist() dan plot nilai rata-rata dan batas atas/bawah yang telah dihitung sebelumnya menggunakan fungsi abline().
+
+```r
+# Menentukan rata-rata dan standar deviasi
+mean <- 45
+sd <- 5
+
+# Menentukan nilai X1 dan X2
+X1 <- floor(mean)
+X2 <- ceiling(mean)
+
+# Menghitung probabilitas menggunakan fungsi pnorm
+prob <- pnorm(X2, mean, sd) - pnorm(X1, mean, sd)
+
+# Menghitung z-score
+zscore1 <- (X1 - mean) / sd
+zscore2 <- (X2 - mean) / sd
+
+# Menampilkan hasil probabilitas dan z-score
+cat("Probabilitas P(", X1, " ≤ X ≤ ", X2, ") =", prob, "\n")
+cat("Z-score X1 =", zscore1, "\n")
+cat("Z-score X2 =", zscore2, "\n")
+
+# Menghasilkan data acak
+set.seed(123)
+data <- rnorm(100, mean, sd)
+
+# Menampilkan histogram data acak
+hist(data, breaks = 10, main = "Histogram Data Acak", xlab = "Nilai", ylab = "Frekuensi")
+
+# Menampilkan garis vertikal untuk X1 dan X2
+abline(v = X1, lty = 2)
+abline(v = X2, lty = 2)
+
+# Menampilkan plot data acak
+plot(data, main = "Plot Data Acak", xlab = "Nomor Observasi", ylab = "Nilai")
+
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236323593-686dd71e-8697-4daf-a02f-75e3ad08afcb.png)
+
+b.) Gambarkan histogram dari distribusi Normal dengan breaks 50.
+
+**Penyelesaian** :
+- Untuk menyelesaikan soal ini, kita dapat menggunakan fungsi hist() dan menambahkan paramater breaks = 50.
+
+```r
+set.seed(123) 
+
+n <- 100  # jumlah data
+
+mean <- 45  # rata-rata
+
+sd <- 5  # standar deviasi
+
+# generate data acak dari distribusi Normal dengan fungsi rnorm()
+x <- rnorm(n, mean, sd)  
+
+# menggambar histogram dengan breaks 50 dengan fungsi hist()
+hist(x, breaks = 50)  
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236326354-7418ec4f-7018-4aec-a992-50cffac69e1d.png)
+
+
+c.) Nilai varian (σ²) dari hasil data bangkitan acak distribusi Normal.
+
+**Penyelesaian** :
+- hahaha
+
+
+```r
+set.seed(123)
+
+data <- rnorm(100, mean = 45, sd = 5)
+
+var(data)
+
+```
+
+![image](https://user-images.githubusercontent.com/88433109/236327863-068ae982-ffbd-4157-bab2-9935b0f3239f.png)
 
 
 
