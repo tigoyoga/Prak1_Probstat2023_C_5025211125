@@ -446,19 +446,21 @@ hist(x, breaks = 50)
 c.) Nilai varian (σ²) dari hasil data bangkitan acak distribusi Normal.
 
 **Penyelesaian** :
-- hahaha
+- Untuk menentukan nilai variansi (σ²) dari data bangkitan acak distribusi Normal, dapat menggunakan fungsi var() pada R.
 
 
 ```r
 set.seed(123)
 
+# Menghasilkan data dengan distribusi normal
 data <- rnorm(100, mean = 45, sd = 5)
 
+# Menghitung variansi dari data
 var(data)
 
 ```
 
 ![image](https://user-images.githubusercontent.com/88433109/236327863-068ae982-ffbd-4157-bab2-9935b0f3239f.png)
-
+- Nilai varian dari hasil data bangkitan acak distribusi Normal yaitu 20.83082.
 
 
